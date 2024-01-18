@@ -22,10 +22,10 @@ function Navbar() {
             </header>
             <nav style={{background:'rgb(239, 236, 236)', display:'flex', justifyContent:'flex-start'}} className='BottomNavbar' >
                 
-                <img  style={{width:'80px', padding:'0px 20px'}} src={BottomOlx} ></img>
+                <img  className='mediaremove'  style={{width:'80px', padding:'0px 20px'}} src={BottomOlx} ></img>
                 <input className='inp' style={{width:'15rem', height:'40px', margin:'12px 10px 0px 0px', border:'2px solid black', borderRadius:'5px'}} placeholder='Pakistan' ></input>
-                <input className='Inp' style={{width:'40rem', height:'40px', margin:'12px 0px 0px 0px', border:'2px solid black', borderRadius:'5px'}} placeholder='Pakistan' ></input>
-                <button onClick={()=>navigate('/SignInPage')} style={{height:'3rem',fontWeight:'bold', fontSize:'15px' , marginTop:'10px', border:'none', background:'none'}} ><u>Login</u></button>
+                <input className='Inp' style={{width:'45rem', height:'40px', margin:'12px 15px 0px 0px', border:'2px solid black', borderRadius:'5px'}} placeholder='Pakistan' ></input>
+                <button onClick={()=>navigate('/SignIn')} style={{height:'3rem',fontWeight:'bold', fontSize:'15px' , marginTop:'10px', border:'none', background:'none'}} ><u>Login</u></button>
             </nav>
         </div>
 

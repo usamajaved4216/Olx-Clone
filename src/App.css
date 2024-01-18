@@ -10,8 +10,15 @@
  .Inp{
    max-width: 13rem;
   }
+  .mediaremove {
+    display: none;
+    
+  }
+  .mediaIcon {
+    display: inline-block;
+  }
 }
-
+ 
 
   
 
