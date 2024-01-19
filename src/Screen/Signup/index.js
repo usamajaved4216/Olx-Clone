@@ -12,9 +12,14 @@ const [Password, setPassword]= useState()
 
     const navigate =useNavigate()
 
-    const handleSignUp = () => {
-        SignUp({email: Email, password: Password})
-    }
+    const signup = async () => {
+      try {
+          await SignUp({ fullName, Age, Email, Password });
+          navigate('/SignIn')
+      } catch (error) {
+          console.log("🚀 ~ register ~ error:", error)
+      }
+  }
 
     return(
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
@@ -29,7 +34,7 @@ const [Password, setPassword]= useState()
       <input style={{ width: '80%', height: '30px', border: 'none',  margin: '10px 0' }} placeholder="Age" onChange={(e) => setAge(e.target.value)} />
       <input style={{ width: '80%', height: '30px', border: 'none',  margin: '10px 0' }} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
       <br />
-      <button style={{ width: '100%', height: '30px', border: 'none', background: 'rgb(51, 47, 122)', color: 'white' }} onClick={() => handleSignUp()}>Create Account</button>
+      <button style={{ width: '100%', height: '30px', border: 'none', background: 'rgb(51, 47, 122)', color: 'white' }} onClick={signup}>Create Account</button>
       <p>
         Already Have An Account.
         <span onClick={() => navigate('/SignIn')}>SignIn</span>

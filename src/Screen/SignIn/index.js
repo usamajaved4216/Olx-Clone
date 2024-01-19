@@ -37,7 +37,7 @@ function SignInPage() {
                 <p style={{ display: "flex", marginLeft: '15px' }} >Password</p>
                 <input style={{ width: '90%', height: '30px', border: 'none' }} placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
                 <p style={{ display: "flex", marginLeft: '15px' }} >Forgotten Password</p>
-                <button style={{ width: '90%', height: '30px', border: 'none', background: 'rgb(51, 47, 122)', color: 'white', cursor: "pointer" }} onClick={() => login()}>Login</button>
+                <button style={{ width: '90%', height: '30px', border: 'none', background: 'rgb(51, 47, 122)', color: 'white', cursor: "pointer" }} onClick={login}>Login</button>
                 <p>Don't You Have An Account</p>
                 <button onClick={() => navigate('/SignUp')}>Register</button>
             </div>

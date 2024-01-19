@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -13,45 +13,78 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+const db = getFirestore(app);
 
-function SignUp(userInfo) {
+async function SignUp(userInfo) {
   console.log("🚀 ~ SignUp ~ userInfo:", userInfo)
-  const { email, password } = userInfo
+  try {
+    const { email, password, fullName, age } = userInfo
+    console.log("🚀 ~ SignUp ~ fullname:", fullName)
 
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      console.log("🚀 ~ .then ~ userCredential:", userCredential)
-      const user = userCredential.user;
-      alert('Registered SignUp Successfylly')
+    await createUserWithEmailAndPassword(auth, email, password)
+    await addDoc(collection(db, 'user'), {
+      fullName,
+      age,
+      email,
+    }).then((res) => {
+      console.log("🚀 ~ awaitaddDoc ~ res:", res)
+
+
+    }).catch(err => {
+      console.log("🚀 ~ awaitaddDoc ~ err:", err)
+
+
     })
-    .catch((error) => {
-      console.log("🚀 ~ SignUp ~ error:", error)
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage)
-    });
-
+    alert('register successfully!')
+    return true
+  } catch (e) {
+    console.log("🚀 ~ SignUp ~ e:", e)
+    alert(e.message)
+    return e
+  }
 }
- async function Login(userInfo) {
+
+
+async function Login(userInfo) {
   console.log("🚀 ~ Login ~ userInfo:", userInfo)
   const { email, password } = userInfo
 
-try{
+  try {
 
-  await signInWithEmailAndPassword(auth, email, password).then(res => {
-  console.log("🚀 ~ awaitsignInWithEmailAndPassword ~ res:", res)
-  alert('Login Successfully')
-  return res;
-  })
-}catch(e){
-  alert(e.message)
-  return e
+    return await signInWithEmailAndPassword(auth, email, password).then(res => {
+      console.log("🚀 ~ awaitsignInWithEmailAndPassword ~ res:", res)
+      alert('Login Successfully')
+      return res;
+    })
+  } catch (e) {
+    alert(e.message)
+    return e
+  }
 }
+const postData = async (userInfo) => {
+  console.log("🚀 ~ postData ~ userInfo:", userInfo)
+  try {
+    const { productName , price , description , quantity } = userInfo;
+    await addDoc(collection(db, 'users'), {
+      productName,
+      price, 
+      description, 
+      quantity
+    });
 
-}
+    alert('Successfully Post Ad');
+    return true;
+  } catch (e) {
+    alert(e.message);
+    return e
+  };
+ }
+
+
 
 export {
   SignUp,
-  Login
+  Login,
+  postData
 }
 
