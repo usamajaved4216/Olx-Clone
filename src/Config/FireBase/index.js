@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 
 const firebaseConfig = {
@@ -14,6 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
+const storage = getStorage();
 
 async function SignUp(userInfo) {
   console.log("🚀 ~ SignUp ~ userInfo:", userInfo)
@@ -64,13 +66,26 @@ async function Login(userInfo) {
 const postData = async (userInfo) => {
   console.log("🚀 ~ postData ~ userInfo:", userInfo)
   try {
-    const { productName , price , description , quantity } = userInfo;
-    await addDoc(collection(db, 'users'), {
+    const { productName, price, description, image } = userInfo;
+
+    // const storageRef = ref(storage, `ad/${image.name}`);
+
+    // await uploadBytes(storageRef, image)
+    // alert('image uploaded successfully')
+
+    // const url = await getDownloadURL(storageRef)
+    // console.log("🚀 ~ postData ~ url:", url)
+
+
+
+    await addDoc(collection(db, 'Add Cart'), {
       productName,
-      price, 
-      description, 
-      quantity
+      price,
+      description,
+      // imageUrl: url,
     });
+
+
 
     alert('Successfully Post Ad');
     return true;
@@ -78,8 +93,7 @@ const postData = async (userInfo) => {
     alert(e.message);
     return e
   };
- }
-
+}
 
 
 export {

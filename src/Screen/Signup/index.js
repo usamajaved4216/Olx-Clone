@@ -5,16 +5,16 @@ import olx from '../../Assest/ulx.svg'
 
 function SignUpPage() {
 const [fullName, setFullName]= useState()
-const [Email, setEmail]= useState()
-const [Age, setAge]= useState()
-const [Password, setPassword]= useState()
+const [email, setEmail]= useState()
+const [age, setAge]= useState()
+const [password, setPassword]= useState()
 
 
     const navigate =useNavigate()
 
     const signup = async () => {
       try {
-          await SignUp({ fullName, Age, Email, Password });
+          await SignUp({ fullName, age, email, password });
           navigate('/SignIn')
       } catch (error) {
           console.log("🚀 ~ register ~ error:", error)
