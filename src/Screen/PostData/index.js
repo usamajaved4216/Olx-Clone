@@ -64,7 +64,7 @@ const handlePostData= ()=>{
 
 
 
-            {/* <input type="file" style={{ width: '100%', marginBottom: '10px', boxSizing: 'border-box' }} onChange={(e)=> setImage(e.target.files[0]) } /> */}
+            <input type="file" style={{ width: '100%', marginBottom: '10px', boxSizing: 'border-box' }} onChange={(e)=> setImage(e.target.files[0]) } />
             <br/>
             <button
               style={{

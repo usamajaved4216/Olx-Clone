@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 
@@ -13,7 +13,7 @@ const firebaseConfig = {
   appId: "1:969278543508:web:f021aa13b18d8cdde48681"
 };
 const app = initializeApp(firebaseConfig);
-const auth = getAuth();
+export const auth = getAuth();
 const db = getFirestore(app);
 const storage = getStorage();
 
@@ -68,13 +68,13 @@ const postData = async (userInfo) => {
   try {
     const { productName, price, description, image } = userInfo;
 
-    // const storageRef = ref(storage, `ad/${image.name}`);
+    const storageRef = ref(storage, `ad/${image.name}`);
 
-    // await uploadBytes(storageRef, image)
-    // alert('image uploaded successfully')
+    await uploadBytes(storageRef, image)
+    alert('image uploaded successfully')
 
-    // const url = await getDownloadURL(storageRef)
-    // console.log("🚀 ~ postData ~ url:", url)
+    const url = await getDownloadURL(storageRef)
+    console.log("🚀 ~ postData ~ url:", url)
 
 
 
@@ -82,7 +82,7 @@ const postData = async (userInfo) => {
       productName,
       price,
       description,
-      // imageUrl: url,
+      imageUrl: url,
     });
 
 
@@ -93,6 +93,18 @@ const postData = async (userInfo) => {
     alert(e.message);
     return e
   };
+}
+export async function getAds() {
+  const querySnapshot = await getDocs(collection(db, 'ads'));
+  const ads = [];
+  querySnapshot.forEach((doc) => {
+      const ad = doc.data();
+      ad.id = doc.id;
+
+      ads.push(ad)
+  });
+
+  return ads;
 }
 
 
