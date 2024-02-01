@@ -1,4 +1,6 @@
-
+.App {
+  text-align: center;
+}
 @media screen and (max-width: 600px) {
   .BottomNavbar {
       flex-direction: column;
@@ -9,7 +11,7 @@
   max-width: 13rem;
   }
  .Inp{
-   max-width: 20rem;
+   max-width: 100%;
   }
   .mediaremove {
     display: none;
@@ -20,8 +22,6 @@
   }
 }
  
-
-  
 
   
 

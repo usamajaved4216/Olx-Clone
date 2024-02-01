@@ -95,13 +95,13 @@ const postData = async (userInfo) => {
   };
 }
 export async function getAds() {
-  const querySnapshot = await getDocs(collection(db, 'ads'));
+  const querySnapshot = await getDocs(collection(db, 'Add Cart'));
   const ads = [];
   querySnapshot.forEach((doc) => {
       const ad = doc.data();
       ad.id = doc.id;
-
       ads.push(ad)
+
   });
 
   return ads;

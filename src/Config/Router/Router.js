@@ -3,6 +3,7 @@ import SignInPage from "../../Screen/SignIn";
 import Dashboard from "../../Views/Dashboard";
 import SignUpPage from '../../Screen/Signup'
 import PostDataPage from "../../Screen/PostData";
+import DetailCartScreen from "../../Screen/DetailScreen";
 
 
 function AppRouter() {
@@ -13,6 +14,8 @@ function AppRouter() {
                 <Route path="/SignIn" element={<SignInPage/>} />
                 <Route path="/SignUp" element={<SignUpPage/>} />
                 <Route path="/PostData" element={<PostDataPage/>} />
+                <Route path="/DetailScreen" element={<DetailCartScreen/>} />
+
             </Route>
         </Routes>
      )
